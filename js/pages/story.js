@@ -1,0 +1,2 @@
+/* STORY PAGE */
+pages['/story']=()=>[`<h2 class="ttl">Our <em>story</em>, so far</h2><p class="sub">Chapters written in laughter.</p><div class="tl">${CH.map(([t,d,p],i)=>`<div class="tc rv ${i%2?'r':''}"><div class="dot">♥</div><div class="tx"><div class="note"><small>chapter ${i+1}</small><h3>${t}</h3><p>${d}</p></div></div><div class="ph">${p.map((k,j)=>pol(k-1,'',j?4:-4)).join('')}</div></div>`).join('')}</div>`,rv];

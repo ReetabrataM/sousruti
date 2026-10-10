@@ -1,0 +1,4 @@
+Put your own birthday song here, named exactly:  birthday.mp3
+It plays on the Cake page when she cuts the cake (or taps the Birthday song button).
+While it plays, Husn pauses. When she goes to another page, the birthday song stops and Husn starts again.
+If this file is missing, a simple built-in Happy Birthday tune plays instead.
