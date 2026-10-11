@@ -4,7 +4,7 @@ const sfx=n=>(n%100>=11&&n%100<=13)?'th':({1:'st',2:'nd',3:'rd'}[n%10]||'th');
 const $=(s,e=document)=>e.querySelector(s),$$=(s,e=document)=>[...e.querySelectorAll(s)];
 const rnd=(a,b)=>a+Math.random()*(b-a),sv=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}},ld=(k,d)=>{try{return JSON.parse(localStorage.getItem(k))??d}catch(e){return d}};
 const R=document.documentElement;R.style.setProperty('--ph',`url(${new URL(IM[GATE_PHOTO-1],document.baseURI).href})`);
-R.dataset.theme='light';
+R.dataset.theme='dark';
 const tb=()=>$('#th').textContent=R.dataset.theme=='dark'?'☀':'☾';tb();$('#th').onclick=()=>{R.dataset.theme=R.dataset.theme=='dark'?'light':'dark';tb()};
 /* petals */
 const bg=$('#bg'),b=bg.getContext('2d');let FF=[],mx=0,my=0;

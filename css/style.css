@@ -176,3 +176,17 @@ header{background:var(--hb);-webkit-backdrop-filter:blur(14px);backdrop-filter:b
 .core:before{content:'';position:absolute;inset:-7px;border-radius:50%;background:conic-gradient(#e8456a,#f4b942,#6fae94,#8f6fd6,#e8456a);animation:sp 9s linear infinite}
 .core img{position:relative;display:block;width:100%;height:100%;object-fit:cover;object-position:center 20%;border-radius:50%;border:6px solid #fff;transition:opacity .22s}
 .cfc{transition:opacity .4s}
+
+/* ---------- PASSWORD PAGE: tidy on phones, follows light/dark theme ---------- */
+#gate{overflow-y:auto;overflow-x:hidden;color:var(--ink);background:radial-gradient(60vmax 50vmax at 0 0,var(--b1),transparent 60%),radial-gradient(55vmax 45vmax at 100% 100%,var(--b2),transparent 60%),var(--bg)}
+.gc{height:auto;min-height:100%}
+.gc .hand,.hb em,.lh,.pin i{color:var(--acc)}.hb{color:var(--ink)}.lm,.dt{color:var(--mut)}
+.pin input{width:clamp(50px,15vw,64px);height:clamp(62px,18vw,76px);background:var(--card);color:var(--ink);border-color:var(--line)}.pin input:focus{border-color:var(--acc)}
+:root[data-theme=dark] .big,:root[data-theme=dark] .b20{filter:brightness(1.12) saturate(1.1) drop-shadow(0 0 20px rgba(255,150,170,.35));-webkit-text-stroke:1px rgba(255,235,220,.4)}
+@media(max-width:700px){
+ .big{font-size:clamp(120px,min(40vw,27vh),300px)}
+ .gc{padding:calc(env(safe-area-inset-top,0px) + 184px) 18px calc(env(safe-area-inset-bottom,0px) + 36px)}
+ .g1,.g2,.g3{display:block;width:min(27vw,112px);bottom:auto;right:auto;top:calc(env(safe-area-inset-top,0px) + 24px)}
+ .g1{left:calc(50% - 150px);--r:-11deg}.g2{left:calc(50% - 56px);--r:3deg;top:calc(env(safe-area-inset-top,0px) + 12px)}.g3{left:calc(50% + 38px);--r:12deg}.g4{display:none}
+}
+@media(max-height:560px){.gp{display:none!important}.gc{padding-top:24px;padding-bottom:16px}.big{font-size:clamp(90px,26vh,200px)}.hb{margin-bottom:10px}}
