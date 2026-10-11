@@ -9,7 +9,7 @@ const tb=()=>$('#th').textContent=R.dataset.theme=='dark'?'☀':'☾';tb();$('#t
 /* petals */
 const bg=$('#bg'),b=bg.getContext('2d');let FF=[],mx=0,my=0;
 function rb(){bg.width=innerWidth;bg.height=innerHeight;FF=Array.from({length:Math.min(18,innerWidth/50)},()=>({x:rnd(0,bg.width),y:rnd(0,bg.height),r:rnd(5,10),t:rnd(0,6),vy:rnd(.25,.6),a:rnd(0,6)}))}rb();addEventListener('resize',rb);
-(function f(t){b.clearRect(0,0,bg.width,bg.height);const c=getComputedStyle(R).getPropertyValue('--pt');
+(function f(t){if(R.classList.contains('locked')){requestAnimationFrame(f);return}b.clearRect(0,0,bg.width,bg.height);const c=getComputedStyle(R).getPropertyValue('--pt');
 FF.forEach(s=>{s.y+=s.vy;s.a+=.01;if(s.y>bg.height+20){s.y=-20;s.x=rnd(0,bg.width)}b.save();b.translate(s.x+Math.sin(t/1800+s.t)*30+mx*s.r*6,s.y);b.rotate(s.a+Math.sin(t/1200+s.t));b.fillStyle=`rgba(${c},.32)`;b.beginPath();b.ellipse(0,0,s.r,s.r*.55,0,0,6.3);b.fill();b.restore()});requestAnimationFrame(f)})(0);
 /* particles */
 const fx=$('#fx'),x=fx.getContext('2d');let P=[],run=0;
@@ -20,8 +20,8 @@ function rain(n=70){for(let i=0;i<n;i++)P.push({x:rnd(0,innerWidth),y:rnd(-300,-
 function tick(){if(run)return;run=1;(function f(){x.clearRect(0,0,innerWidth,innerHeight);P=P.filter(p=>p.l>0&&p.y<innerHeight+40);
 P.forEach(p=>{p.vx*=.99;p.vy+=p.g;p.x+=p.vx;p.y+=p.vy;p.l-=p.d;x.globalAlpha=Math.max(p.l,0);x.fillStyle=p.c;if(p.h){x.font=p.s*2.4+'px serif';x.fillText('♥',p.x,p.y)}else x.fillRect(p.x,p.y,p.s,p.s*.5)});
 P.length?requestAnimationFrame(f):(run=0,x.clearRect(0,0,innerWidth,innerHeight))})()}
-let lt=0;addEventListener('pointermove',e=>{mx=e.clientX/innerWidth-.5;my=e.clientY/innerHeight-.5;if(e.timeStamp-lt>40){lt=e.timeStamp;P.push({x:e.clientX,y:e.clientY,vx:rnd(-.6,.6),vy:rnd(-1,-.2),g:-.01,l:1,d:.035,c:'#ffc77a',s:3,h:0});tick()}});
-addEventListener('click',e=>{if(!e.target.closest('input,#dock'))burst(e.clientX,e.clientY,12,.5)});
+let lt=0;addEventListener('pointermove',e=>{if(R.classList.contains('locked'))return;mx=e.clientX/innerWidth-.5;my=e.clientY/innerHeight-.5;if(e.timeStamp-lt>40){lt=e.timeStamp;P.push({x:e.clientX,y:e.clientY,vx:rnd(-.6,.6),vy:rnd(-1,-.2),g:-.01,l:1,d:.035,c:'#ffc77a',s:3,h:0});tick()}});
+addEventListener('click',e=>{if(!R.classList.contains('locked')&&!e.target.closest('input,#dock'))burst(e.clientX,e.clientY,12,.5)});
 /* synth (cake song + acoustic ambient) */
 let AC,mg;
 function ac(){if(!AC){AC=new(window.AudioContext||window.webkitAudioContext)();mg=AC.createGain();mg.gain.value=.6;const d=AC.createDelay(),f=AC.createGain();d.delayTime.value=.3;f.gain.value=.3;d.connect(f);f.connect(d);mg.connect(d);d.connect(AC.destination);mg.connect(AC.destination)}AC.resume();return AC}
