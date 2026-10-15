@@ -6,6 +6,12 @@ const rnd=(a,b)=>a+Math.random()*(b-a),sv=(k,v)=>{try{localStorage.setItem(k,JSO
 const R=document.documentElement;R.style.setProperty('--ph',`url(${new URL(IM[GATE_PHOTO-1],document.baseURI).href})`);
 R.dataset.theme='dark';
 const tb=()=>$('#th').textContent=R.dataset.theme=='dark'?'☀':'☾';tb();$('#th').onclick=()=>{R.dataset.theme=R.dataset.theme=='dark'?'light':'dark';tb()};
+/* A few Android in-app browsers occasionally keep a failed image response in memory.
+   Retry it once with a fresh URL instead of leaving an empty frame. */
+document.addEventListener('error',e=>{const img=e.target;if(!(img instanceof HTMLImageElement)||img.dataset.retry)return;
+ const src=img.currentSrc||img.src;if(!src||!/(?:\/photos\/|\/images\/school\.jpg)/.test(src))return;
+ img.dataset.retry='1';const u=new URL(src,location.href);u.searchParams.set('retry','1');img.src=u.href;
+},true);
 /* petals */
 const bg=$('#bg'),b=bg.getContext('2d');let FF=[],mx=0,my=0;
 function rb(){bg.width=innerWidth;bg.height=innerHeight;FF=Array.from({length:Math.min(18,innerWidth/50)},()=>({x:rnd(0,bg.width),y:rnd(0,bg.height),r:rnd(5,10),t:rnd(0,6),vy:rnd(.25,.6),a:rnd(0,6)}))}rb();addEventListener('resize',rb);
